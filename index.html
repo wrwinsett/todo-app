@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="eng">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="todo-app">
+        <h2>Toby <img src="images/westie.ico" /></h2>
+
+        <div class="row">
+          <input type="text" id="input-box" placeholder="hello friend" />
+          <!-- allows the user to input, with the type of input being text, and some
+          placeholder text -->+
+          <input type="datetime-local" id="time-input" />
+          <button onclick="addTask()"><img src="images/westie.ico" /</button>
+        </div>
+
+        <ul id="list-container">
+          <!-- <li class="checked">Task 1</li>
+          <li>Task 2</li>
+          <li>Task 3</li> -->
+        </ul>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
