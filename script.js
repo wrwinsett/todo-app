@@ -1,22 +1,34 @@
 const inputBox = document.getElementById("input-box");
+const timeInput = document.getElementById("time-input");
 const listContainer = document.getElementById("list-container");
 
 function addTask() {
-  const task = document.getElementById("input-box").value;
-  const time = document.getElementById("time-input").value;
+  const task = inputBox.value;
+  const time = timeInput.value;
 
-  if (inputBox.value === "") {
+  if (task === "") {
     alert("You must write something!");
+    return;
+  }
+
+  if (!time) {
+    alert("please pick a time and day!");
+    return;
   } else {
+    const parsedTime = new Date(time);
+    const formatTime = parsedTime.toLocaleString();
+
     let li = document.createElement("li");
-    li.innerHTML = task + "(at " + time + ")";
+    li.innerHTML = task + " at " + formatTime + ".";
 
     listContainer.appendChild(li);
     let span = document.createElement("span");
     span.innerHTML = "\u00d7";
     li.appendChild(span);
   }
+
   inputBox.value = "";
+  timeInput.value = "";
   saveData();
 }
 
