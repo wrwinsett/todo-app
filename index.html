@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>To-Do List App</title>
     <link rel="stylesheet" href="style.css" />
+    <!-- below includes date and time picker -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
   </head>
 
   <body>
@@ -20,8 +25,17 @@
         </div>
 
         <div class="row">
-          <input type="datetime-local" id="time-input" />
+          <label for="date-time-picker">When?</label>
+          <input
+            type="text"
+            id="date-time-picker"
+            placeholder="select date and time"
+          />
         </div>
+        <!-- 
+        <div class="row">
+          <input type="datetime-local" id="time-input" />
+        </div> -->
 
         <div class="row">
           <button onclick="addTask()"><img src="images/westie.ico" /</button>
@@ -34,6 +48,8 @@
         </ul>
       </div>
     </div>
+    <!-- Include the date and time picker library -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="script.js"></script>
   </body>
 </html>

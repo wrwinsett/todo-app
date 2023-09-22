@@ -1,15 +1,26 @@
 const inputBox = document.getElementById("input-box");
-const timeInput = document.getElementById("time-input");
+const dateTimePicker = document.getElementById("date-time-picker");
 const listContainer = document.getElementById("list-container");
 
 let tasksDated = [];
 
+flatpickr(dateTimePicker, {
+  enableTime: true,
+  dateFormat: "Y-m-d H:i",
+});
+
 function addTask() {
   const taskText = inputBox.value;
-  const date = new Date(timeInput.value);
+  const dateTimeText = dateTimePicker.value;
+  const date = new Date(dateTimeText);
 
   if (taskText === "") {
     alert("You must write something!");
+    return;
+  }
+
+  if (isNaN(date)) {
+    displayError("Invalid date and time format.");
     return;
   }
 
@@ -37,7 +48,8 @@ function addTask() {
   displayTasks();
 
   inputBox.value = "";
-  timeInput.value = "";
+  dateTimePicker.value = "";
+  clearError();
   saveData();
 }
 
@@ -51,6 +63,7 @@ function displayTasks() {
     const formatTime = task.date.toLocaleString();
     li.innerHTML = `${task.text} at ${formatTime}.`;
     listContainer.appendChild(li);
+    li.classList.add("fade-in");
 
     const span = document.createElement("span");
     span.innerHTML = "\u00d7";
@@ -83,6 +96,10 @@ function saveData() {
 }
 function showTask() {
   listContainer.innerHTML = localStorage.getItem("data");
+}
+
+function clearError() {
+  errorMessage.textContent = "";
 }
 
 showTask();
