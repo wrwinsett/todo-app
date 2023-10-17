@@ -2,7 +2,7 @@ const inputBox = document.getElementById("input-box");
 const dateTimePicker = document.getElementById("date-time-picker");
 const listContainer = document.getElementById("list-container");
 
-let tasksDated = [];
+let tasksDated = loadTasks();
 
 flatpickr(dateTimePicker, {
   enableTime: true,
@@ -91,11 +91,21 @@ listContainer.addEventListener(
   false
 );
 
+function loadTasks() {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  return tasks || [];
+}
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasksDated));
+}
+
 function saveData() {
   localStorage.setItem("data", listContainer.innerHTML);
 }
 function showTask() {
-  listContainer.innerHTML = localStorage.getItem("data");
+  tasksDated.sort((a, b) => a.date - b.date);
+  displayTasks();
 }
 
 function clearError() {
