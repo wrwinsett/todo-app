@@ -2,7 +2,7 @@ const inputBox = document.getElementById("input-box");
 const dateTimePicker = document.getElementById("date-time-picker");
 const listContainer = document.getElementById("list-container");
 
-let tasksDated = loadTasks();
+const tasksDated = loadTasks();
 
 flatpickr(dateTimePicker, {
   enableTime: true,
@@ -50,7 +50,7 @@ function addTask() {
   inputBox.value = "";
   dateTimePicker.value = "";
   clearError();
-  saveData();
+  saveTasks();
 }
 
 function displayTasks() {
