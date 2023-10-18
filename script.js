@@ -28,7 +28,7 @@ function addTask() {
     alert("please pick a time and day!");
     return;
   } else {
-    const task = { text: taskText, date: date };
+    const task = { text: taskText, date: date, checked: false };
     tasksDated.push(task);
 
     tasksDated.sort((a, b) => a.date - b.date);
@@ -65,6 +65,10 @@ function displayTasks() {
     listContainer.appendChild(li);
     li.classList.add("fade-in");
 
+    if (task.checked) {
+      li.classList.add("checked");
+    }
+
     const span = document.createElement("span");
     span.innerHTML = "\u00d7";
     li.appendChild(span);
@@ -81,7 +85,12 @@ listContainer.addEventListener(
   "click",
   function (e) {
     if (e.target.tagName === "LI") {
-      e.target.classList.toggle("checked");
+      const li = e.target;
+      li.classList.toggle("checked");
+      const taskIndex = Array.from(li.parentNode.children).indexOf(li);
+      tasksDated[taskIndex].checked = li.classList.contains("checked");
+
+      // e.target.classList.toggle("checked");
       saveData();
     } else if (e.target.tagName === "SPAN") {
       e.target.parentElement.remove();
@@ -102,6 +111,7 @@ function saveTasks() {
 
 function saveData() {
   localStorage.setItem("data", listContainer.innerHTML);
+  saveTasks();
 }
 function showTask() {
   tasksDated.sort((a, b) => a.date - b.date);
